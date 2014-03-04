@@ -11,5 +11,5 @@ package possystem;
  * @author dbell17
  */
 public interface ReceiptDataAccessStrategy {
-    public abstract ItemsForSale findProduct(String productId);
+    public abstract Product findProduct(String productId);
 }

@@ -14,7 +14,7 @@ public class QtyDiscount implements DiscountStrategy{
     private double percent =.10 ;
     private double minQuantity =5;
 
-    public QtyDiscount(double percent, double qty) {
+    public QtyDiscount(double percent, double qty, double minQuantity) {
         setPercent(percent);
         setMinQuantity(minQuantity);
     }

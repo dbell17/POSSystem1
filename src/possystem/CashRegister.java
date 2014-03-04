@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package possystem;
 
 /**
@@ -11,12 +10,18 @@ package possystem;
  * @author dbell17
  */
 public class CashRegister {
-    
-    Receipt receipt1 = new Receipt();
-    
-    
-    
-     
-      
-}
 
+    private Receipt receipt;
+
+    public void startNewSale() {
+        receipt = new Receipt();
+    }
+
+    public void addNewItem(String productId, int qty, ReceiptDataAccessStrategy fakeDatabase) {
+        receipt.addItemToReceipt(productId, qty, fakeDatabase);
+    }
+
+    public void displayInvoice() {
+        receipt.getReceipt();
+    }
+}

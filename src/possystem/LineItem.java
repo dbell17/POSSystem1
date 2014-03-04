@@ -11,22 +11,26 @@ package possystem;
  */
 public class LineItem {
 
-    private String itemPerLine;
     private int quantity;
-    private ItemsForSale itemPurchased;
+    private Product product;
+    private ReceiptDataAccessStrategy fakeDatabase;
 
-    public String getItemPerLine() {
-        return itemPerLine;
-    }
-
-    public void setItemPerLine(String itemPerLine) {
-        this.itemPerLine = itemPerLine;
-    }
-
-    public void setLineItem(String lineItem, int quantity) {
-        setItemPerLine(itemPerLine);
+    public LineItem(int quantity, String productId, ReceiptDataAccessStrategy fakeDatabase ) {
         setQuantity(quantity);
+        product = findProductById(productId);
+        this.fakeDatabase = fakeDatabase;
     }
+
+    private Product findProductById(String id){
+        return fakeDatabase.findProduct(id);
+    }
+//    public String getItemPerLine() {
+//        return itemOutput;
+//    }
+//
+//    public void setItemOutput(String itemOutput) {
+//        this.itemOutput = itemOutput;
+//    }
 
     public int getQuantity() {
         return quantity;
@@ -36,14 +40,19 @@ public class LineItem {
         this.quantity = quantity;
     }
 
-    public ItemsForSale getItemPurchased() {
-        return itemPurchased;
+    public Product getItemPurchased() {
+        return product;
     }
 
-    public void setItemPurchased(ItemsForSale itemPurchased) {
-        this.itemPurchased = itemPurchased;
+    public void setItemPurchased(Product itemPurchased) {
+        this.product = itemPurchased;
     }
 
     public double getAmountSaved() {       
-        return itemPurchased.getDiscountStrategy().getDiscountedTotal(itemPurchased.getPrice(), quantity);    }
+        return product.getDiscountStrategy().getDiscountedTotal(product.getPrice(), quantity);    
     }
+    public double getSubtotal(){
+    
+    return product.getPrice() * quantity;
+}
+}

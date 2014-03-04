@@ -10,14 +10,14 @@ package possystem;
  *
  * @author dbell17
  */
-public class ItemsForSale {
+public class Product {
     private String productId;
     private String productName;
     private double price;
     // type maybe?
     private DiscountStrategy discountStrategy;
 
-    public ItemsForSale(String productId, String productName, double price, DiscountStrategy discountStrategy) {
+    public Product(String productId, String productName, double price, DiscountStrategy discountStrategy) {
         // setter method change this
         setProductId(productId);
         setProductName(productName);

@@ -13,19 +13,18 @@ import java.util.Date;
  */
 public class Receipt implements ReceiptStrategy {
 
-    private String storeName = "ABC Department Store";
+    private final String storeName = "ABC Department Store";
     private LineItem[] itemPerLine;
 
 //    public Receipt(LineItem[] itemPerLine) {
 //        this.itemPerLine = itemPerLine;
 //    }
-
     public String getStoreName() {
         return storeName;
     }
 
     public void setStoreName(String storeName) {
-        this.storeName = storeName;
+        setStoreName(storeName);
     }
 
     public LineItem[] getItemPerLine() {
@@ -40,7 +39,6 @@ public class Receipt implements ReceiptStrategy {
     public void getReceipt() {
 
         Date date1 = new Date();
-        
 
         System.out.println(storeName + "        Date :" + date1.toString());
         System.out.println("-------------------------------------------------------------------------------------------");
@@ -81,5 +79,18 @@ public class Receipt implements ReceiptStrategy {
             billTotal += items.getItemPurchased().getPrice();
         }
         return billTotal;
+    }
+
+    public void addItemToReceipt(String productId, int qty, ReceiptDataAccessStrategy fakeDatabase) {
+        LineItem item = new LineItem(qty, productId, fakeDatabase);
+        addToArray(item);
+    }
+    
+    public void addToArray(final LineItem item) {
+        // needs validation
+        LineItem[] tempItems = new LineItem[itemPerLine.length + 1];
+        System.arraycopy(itemPerLine, 0, tempItems, 0, itemPerLine.length);
+        tempItems[itemPerLine.length] = item;
+        itemPerLine = tempItems;
     }
 }

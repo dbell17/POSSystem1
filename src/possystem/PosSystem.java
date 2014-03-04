@@ -16,7 +16,11 @@ public class PosSystem {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+       
+       CashRegister cr = new CashRegister();
+       cr.startNewSale();           
+       cr.addNewItem("A999", 1, new FakeDatabase());
+       cr.displayInvoice();
     }
     
 }
