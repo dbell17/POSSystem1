@@ -18,11 +18,14 @@ public class FakeDatabase implements ReceiptDataAccessStrategy{
     
 //    products[0] = new ItemsForSale ("A100", "Packer's Superbowl 2011 Cap", 30.00, PercentOffDiscount);
     
-   public static final ItemsForSale[] products = new ItemsForSale[3];
-   static{
-   products[0] = new ItemsForSale("A100", "Packer's Superbowl 2011 Cap", 30.00, PercentOffDiscount(.15));
-   }  
-         
+   private ItemsForSale[] products = {
+       new ItemsForSale("A999", "Men's Jacket", 89.95, new QtyDiscount(.25, 5)),
+       new ItemsForSale("A197", "Women's Jacket", 79.95, new PercentOffDiscount(.20)),  
+       new ItemsForSale("A897", "Men's Suit", 189.95, new PercentOffDiscount(.15)),      
+       new ItemsForSale("A812", "Women's Suit", 149.95, new PercentOffDiscount(.20)),        
+       new ItemsForSale("A659", "Women's Sweater", 49.95, new PercentOffDiscount(.05)),      
+       new ItemsForSale("A789", "Men's Jeans", 19.95, new QtyDiscount(.10, 4))  
+   };
         
     
 
@@ -40,8 +43,7 @@ public class FakeDatabase implements ReceiptDataAccessStrategy{
         
         // validation is needed for method parameter
         if (productId == null || productId.length() == 0) {
-            System.out.println("Sorry, FakeDatabase.findProduct method has "
-                    + "illegal argument");
+            System.out.println("Sorry, no product was entered.  Try again.");
         } else {
             for (ItemsForSale p : products) {
                 if (productId.equals(p.getProductId())) {

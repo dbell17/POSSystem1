@@ -5,8 +5,6 @@
  */
 package possystem;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -17,6 +15,10 @@ public class Receipt implements ReceiptStrategy {
 
     private String storeName = "ABC Department Store";
     private LineItem[] itemPerLine;
+
+//    public Receipt(LineItem[] itemPerLine) {
+//        this.itemPerLine = itemPerLine;
+//    }
 
     public String getStoreName() {
         return storeName;
@@ -36,9 +38,48 @@ public class Receipt implements ReceiptStrategy {
 
     @Override
     public void getReceipt() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date = new Date();
-        System.out.println("ABC Receipt" + "\n" + getStoreName() + "\n" + dateFormat.format(date) 
-                + "\n" + "xxxxxxxxxxx");
+
+        Date date1 = new Date();
+        
+
+        System.out.println(storeName + "        Date :" + date1.toString());
+        System.out.println("-------------------------------------------------------------------------------------------");
+        System.out.println("Item ID:          Item Description:       Price:         Quantity:          Discount: ");
+        System.out.println("-------------------------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------------------");
+
+        for (LineItem items : itemPerLine) {
+            items.getItemPurchased().getProductId();
+            items.getItemPurchased().getProductName();
+            items.getItemPurchased().getPrice();
+            items.getQuantity();
+            items.getAmountSaved();
+        }
+        getReceiptTotals();
+    }
+
+    public final void getReceiptTotals() {
+        double overallBillTotal = getTotalBillForReciept();
+        double overallTotalDiscount = getTotalDiscountForReciept();
+        System.out.println("-------------------------------------------------------------------------------------------");
+        System.out.println("Bill Total: " + "Discount Total: ");
+        System.out.println("                                                      $" + overallBillTotal + "  $" + overallTotalDiscount);
+    }
+
+    public double getTotalDiscountForReciept() {
+
+        double discountTotal = 0.0;
+        for (LineItem items : itemPerLine) {
+            discountTotal += items.getAmountSaved();
+        }
+        return discountTotal;
+    }
+
+    private double getTotalBillForReciept() {
+        double billTotal = 0.0;
+        for (LineItem items : itemPerLine) {
+            billTotal += items.getItemPurchased().getPrice();
+        }
+        return billTotal;
     }
 }

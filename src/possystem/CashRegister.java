@@ -12,4 +12,11 @@ package possystem;
  */
 public class CashRegister {
     
+    Receipt receipt1 = new Receipt();
+    
+    
+    
+     
+      
 }
+
