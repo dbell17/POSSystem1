@@ -17,8 +17,10 @@ public class LineItem {
 
     public LineItem(int quantity, String productId, ReceiptDataAccessStrategy fakeDatabase ) {
         setQuantity(quantity);
-        product = findProductById(productId);
         this.fakeDatabase = fakeDatabase;
+        System.out.println("");
+        product = findProductById(productId);
+        
     }
 
     private Product findProductById(String id){

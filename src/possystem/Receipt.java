@@ -15,10 +15,16 @@ public class Receipt implements ReceiptStrategy {
 
     private final String storeName = "ABC Department Store";
     private LineItem[] itemPerLine;
+    
+    
 
 //    public Receipt(LineItem[] itemPerLine) {
 //        this.itemPerLine = itemPerLine;
+    public Receipt() {
+        itemPerLine = new LineItem[0];
+    }
 //    }
+
     public String getStoreName() {
         return storeName;
     }
@@ -34,6 +40,7 @@ public class Receipt implements ReceiptStrategy {
     public void setItemPerLine(LineItem[] itemPerLine) {
         this.itemPerLine = itemPerLine;
     }
+    
 
     @Override
     public void getReceipt() {
@@ -43,25 +50,23 @@ public class Receipt implements ReceiptStrategy {
         System.out.println(storeName + "        Date :" + date1.toString());
         System.out.println("-------------------------------------------------------------------------------------------");
         System.out.println("Item ID:          Item Description:       Price:         Quantity:          Discount: ");
-        System.out.println("-------------------------------------------------------------------------------------------");
-        System.out.println("-------------------------------------------------------------------------------------------");
-
-        for (LineItem items : itemPerLine) {
-            items.getItemPurchased().getProductId();
-            items.getItemPurchased().getProductName();
-            items.getItemPurchased().getPrice();
-            items.getQuantity();
-            items.getAmountSaved();
-        }
-        getReceiptTotals();
+       
+    for (LineItem items : itemPerLine) {     
+        items.getItemPurchased().getProductId();
+        items.getItemPurchased().getProductName();
+        items.getItemPurchased().getPrice();
+        items.getQuantity();
+        items.getAmountSaved();
     }
+    getReceiptTotals();
+}
 
-    public final void getReceiptTotals() {
+public final void getReceiptTotals() {
         double overallBillTotal = getTotalBillForReciept();
         double overallTotalDiscount = getTotalDiscountForReciept();
         System.out.println("-------------------------------------------------------------------------------------------");
         System.out.println("Bill Total: " + "Discount Total: ");
-        System.out.println("                                                      $" + overallBillTotal + "  $" + overallTotalDiscount);
+        System.out.println("$" + overallBillTotal + "  $" + overallTotalDiscount);
     }
 
     public double getTotalDiscountForReciept() {
@@ -85,9 +90,10 @@ public class Receipt implements ReceiptStrategy {
         LineItem item = new LineItem(qty, productId, fakeDatabase);
         addToArray(item);
     }
-    
+
     public void addToArray(final LineItem item) {
         // needs validation
+
         LineItem[] tempItems = new LineItem[itemPerLine.length + 1];
         System.arraycopy(itemPerLine, 0, tempItems, 0, itemPerLine.length);
         tempItems[itemPerLine.length] = item;
